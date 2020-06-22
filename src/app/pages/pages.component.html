@@ -1,0 +1,52 @@
+<mat-drawer-container class="my-container" autosize>
+    <mat-drawer #drawer class="col-7 col-sm-4 col-md-3 col-lg-2 bg-dark" mode="side">
+        <mat-toolbar class="bg-dark text-light">IntraProyect</mat-toolbar>
+
+        <ul *ngFor="let menu of _sbs.menus">
+            <li data-toggle="collapse" [attr.href]="'#'+menu.nombre">
+                <a href="#" class="text-light">{{menu.nombre}} <i [ngClass]="menu.icon"></i></a>
+            </li>
+            <ul [id]="menu.nombre" class="collapse show">
+                <li *ngFor="let submenu of menu.submenus"><a routerLinkActive="active" [routerLink]="submenu.url">{{submenu.nombre}}</a></li>
+            </ul>
+        </ul>
+
+    </mat-drawer>
+
+    <mat-toolbar>
+        <div class="d-flex justify-content-between align-items-center my-container">
+            <div class="d-flex align-items-center">
+                <button mat-icon-button (click)="drawer.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <h4>IntraProyect</h4>
+            </div>
+
+            <div>
+                <button mat-button [matMenuTriggerFor]="menu" class="shadow-sm rounded md-menu"><i class="fas fa-arrow-circle-left"></i> Mario Peralta Westreicher</button>
+                <button mat-icon-button [matMenuTriggerFor]="menu" class="sm-menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                <mat-menu #menu="matMenu">
+                    <div class="p-4">
+                        <div class="text-center">
+                            <img src="../../assets/img/usuario.png" class="img-menu rounded-circle border mb-2">
+                            <h5>Mario Peralta Westreicher</h5>
+                            <p>i201711909@cibertec.edu.pe</p>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-success">Perfil</button>
+                            <button type="button" class="btn btn-success">Dashboard</button>
+                            <button type="button" class="btn btn-success">Logout</button>
+                        </div>
+                    </div>
+                </mat-menu>
+            </div>
+        </div>
+    </mat-toolbar>
+
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-drawer-container>
