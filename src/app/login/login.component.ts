@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { Usuario } from '../models/usuario.model';
 import { UsuarioService } from '../services/usuario/usuario.service';
 import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   validarForm(){
     if(this.form.invalid){
-      Swal.fire('Problemas con el login', 'Los campos solicitados tienen datos inválidos', 'warning');
+      swal('Problemas con el login', 'Los campos solicitados tienen datos inválidos', 'warning');
       return;
     }
 

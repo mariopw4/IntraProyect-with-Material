@@ -4,7 +4,7 @@
 
         <ul *ngFor="let menu of _sbs.menus">
             <li data-toggle="collapse" [attr.href]="'#'+menu.nombre">
-                <a href="#" class="text-light">{{menu.nombre}} <i [ngClass]="menu.icon"></i></a>
+                <a class="text-light pointer">{{menu.nombre}} <i [ngClass]="menu.icon"></i></a>
             </li>
             <ul [id]="menu.nombre" class="collapse show">
                 <li *ngFor="let submenu of menu.submenus"><a routerLinkActive="active" [routerLink]="submenu.url">{{submenu.nombre}}</a></li>
@@ -23,27 +23,35 @@
             </div>
 
             <div>
-                <button mat-button [matMenuTriggerFor]="menu" class="shadow-sm rounded md-menu"><i class="fas fa-arrow-circle-left"></i> Mario Peralta Westreicher</button>
+                <button mat-button [matMenuTriggerFor]="menu" class="shadow-sm rounded md-menu"><i class="fas fa-arrow-circle-left"></i> {{usuario.nombre}}</button>
                 <button mat-icon-button [matMenuTriggerFor]="menu" class="sm-menu">
                     <mat-icon>more_vert</mat-icon>
                   </button>
                 <mat-menu #menu="matMenu">
                     <div class="p-4">
                         <div class="text-center">
-                            <img src="../../assets/img/usuario.png" class="img-menu rounded-circle border mb-2">
-                            <h5>Mario Peralta Westreicher</h5>
-                            <p>i201711909@cibertec.edu.pe</p>
+                            <img [src]="usuario.img | image" class="img-menu rounded-circle border mb-2">
+                            <h5>{{usuario.nombre}}</h5>
+                            <p>{{usuario.email}}</p>
                         </div>
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-success">Perfil</button>
+                            <button routerLink="/perfil" type="button" class="btn btn-success">Perfil</button>
                             <button type="button" class="btn btn-success">Dashboard</button>
-                            <button type="button" class="btn btn-success">Logout</button>
+                            <button (click)="logout()" type="button" class="btn btn-success">Logout</button>
                         </div>
                     </div>
                 </mat-menu>
             </div>
         </div>
     </mat-toolbar>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+            <li class="breadcrumb-item" aria-current="page">{{titulo}}</li>
+        </ol>
+    </nav>
 
     <div class="container">
         <router-outlet></router-outlet>

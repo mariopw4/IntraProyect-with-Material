@@ -6,6 +6,11 @@ import { MaterialComponentsModule } from '../material-components/material-compon
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { RouterModule } from '@angular/router';
 import { ProductosComponent } from './productos/productos.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { PerfilComponent } from './perfil/perfil.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from '../interceptors/token-interceptor.service';
 
 
 
@@ -13,16 +18,26 @@ import { ProductosComponent } from './productos/productos.component';
   declarations: [
     PagesComponent,
     UsuariosComponent,
-    ProductosComponent
+    ProductosComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,
     PagesRouter,
     MaterialComponentsModule,
-    RouterModule
+    RouterModule,
+    PipesModule,
+    ReactiveFormsModule
   ],
   exports:[
     PagesComponent
+  ],
+  providers:[
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ]
 })
 export class PagesModule { }
